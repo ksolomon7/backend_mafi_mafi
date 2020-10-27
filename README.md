@@ -3,7 +3,3 @@
 Backend rails for e-commerce website
 
 
-
-
-* ...
-
