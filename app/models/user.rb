@@ -4,8 +4,11 @@ class User < ApplicationRecord
 
     def user_current_cart
         current_cart= self.carts.find_by(history:false)
-        byebug
         CartSerializer.new(current_cart)
     end
 
+    def past_orders
+        past_order=self.carts.find_by(history:true)
+        CartSerializer.new(past_order)
+    end
 end
