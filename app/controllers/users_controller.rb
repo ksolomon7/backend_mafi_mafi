@@ -1,6 +1,20 @@
 class UsersController < ApplicationController
     before_action :authorized, only: [:keep_logged_in]
 
+    def create
+        byebug
+        @user=User.create(user_params)
+        if @user.valid?
+            user_token = encode_token({user_id: @user.id})
+            render json: {
+                user: UserSerializer.new(@user), 
+                token: user_token
+            }
+        end
+    end
+    
+    
+    
     def index
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
@@ -36,5 +50,11 @@ class UsersController < ApplicationController
             user: UserSerializer.new(@user), 
             token: user_token
         }
+    end
+
+    private
+
+    def user_params
+        params.permit(:username, :password, :first_name, :last_name, :email, :address, :state, :city, :zipcode)
     end
 end

@@ -7,9 +7,11 @@ Rails.application.routes.draw do
 
   get '/keep_logged_in', to: "users#keep_logged_in"
   post '/login', to: "users#index"
+  post '/register', to: 'users#create'
 
   post '/orders', to:  "orders#create"
   delete '/orders/:id', to: "orders#destroy"
+  patch '/orders/:id', to: "orders#update"
   
   patch '/carts/:id/new_order', to: "carts#new_order"
   

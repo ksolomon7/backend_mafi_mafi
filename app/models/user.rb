@@ -1,6 +1,9 @@
 class User < ApplicationRecord
     has_secure_password
     has_many :carts
+    after_create :set_current_cart
+    validates :username, presence: true, uniqueness: true
+    validates :email, uniqueness: true
 
     def full_name
         self.first_name + ' ' + self.last_name
@@ -16,5 +19,9 @@ class User < ApplicationRecord
         all_past_orders.map do |past_order| 
             CartSerializer.new(past_order)
         end
+    end
+
+    def set_current_cart
+        self.carts.create
     end
 end

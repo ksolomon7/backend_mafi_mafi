@@ -10,6 +10,10 @@ class Order < ApplicationRecord
     self.product.product_name
   end
 
+  # def quantity_total
+  #   self.product_price * self["quantity"]
+  # end
+
   def product_price
     self.product.price 
   end
@@ -17,6 +21,7 @@ class Order < ApplicationRecord
   def product_image
     self.product.image 
   end
+
 
 
 end
