@@ -2,7 +2,6 @@ class UsersController < ApplicationController
     before_action :authorized, only: [:keep_logged_in]
 
     def create
-        byebug
         @user=User.create(user_params)
         if @user.valid?
             user_token = encode_token({user_id: @user.id})
@@ -55,6 +54,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :password, :first_name, :last_name, :email, :address, :state, :city, :zipcode)
+        params.permit(:username, :password, :first_name, :last_name, :state, :zipcode)
     end
 end
